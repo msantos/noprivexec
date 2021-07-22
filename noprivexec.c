@@ -90,7 +90,6 @@ static void usage() {
   errx(EXIT_FAILURE,
        "[OPTION] <COMMAND> <...>\n"
        "version: %s (%s)\n"
-       "-v, --verbose             write additional messages to stderr\n"
        "-h, --help                usage summary",
        NOPRIVEXEC_VERSION, NOPRIVEXEC);
 }

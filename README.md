@@ -31,8 +31,5 @@ ping: icmp open socket: Operation not permitted
 
 # OPTIONS
 
--v, --verbose
-: write additional messages to stderr
-
 -h, --help
 : usage summary
