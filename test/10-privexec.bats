@@ -14,7 +14,6 @@ EOF
 
 @test "privileged process" {
     run noprivexec ping 8.8.8.8
-    expect="ping: socket: Operation not permitted"
     cat << EOF
 --- output
 |$output|
@@ -23,6 +22,14 @@ EOF
 --- output
 EOF
 
-    [ "$status" -eq 2 ]
-    [ "$output" = "$expect" ]
+    case $(uname -s) in
+    linux)
+        [ "$status" -eq 2 ]
+        [ "$output" = "ping: socket: Operation not permitted" ]
+        ;;
+    OpenBSD)
+        [ "$status" -eq 127 ]
+        [ "$output" = "noprivexec: ping: Permission denied" ]
+        ;;
+    esac
 }
