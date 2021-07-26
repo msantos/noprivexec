@@ -13,6 +13,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 #include <err.h>
+#include <errno.h>
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,8 +75,10 @@ int disable_setuid(void) {
     if ((strlcat(execpromises, pledgenames[i].name, sizeof(execpromises)) >=
          sizeof(execpromises)) ||
         (strlcat(execpromises, " ", sizeof(execpromises)) >=
-         sizeof(execpromises)))
+         sizeof(execpromises))) {
+      errno = EINVAL;
       return -1;
+    }
   }
   return pledge(NULL, execpromises);
 }
