@@ -13,17 +13,15 @@ EOF
 }
 
 @test "privileged process" {
-    run noprivexec ping 8.8.8.8
+    run noprivexec ping -c 1 8.8.8.8
     cat << EOF
 --- output
 |$output|
----
-|$expect|
 --- output
 EOF
 
     case $(uname -s) in
-    linux)
+    Linux)
         [ "$status" -eq 2 ]
         [ "$output" = "ping: socket: Operation not permitted" ]
         ;;
@@ -31,5 +29,8 @@ EOF
         [ "$status" -eq 127 ]
         [ "$output" = "noprivexec: ping: Permission denied" ]
         ;;
+    *)
+        echo "unsupported platform"
+        exit 1
     esac
 }
