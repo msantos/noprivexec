@@ -1,4 +1,4 @@
-/* Copyright (c) 2021, Michael Santos <michael.santos@gmail.com>
+/* Copyright (c) 2021-2022, Michael Santos <michael.santos@gmail.com>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#if defined(NOPRIVEXEC_seccomp)
+#if defined(NOPRIVEXEC_prctl)
 #include <sys/prctl.h>
 #elif defined(NOPRIVEXEC_pledge)
 #include <string.h>
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
   err(127, "%s", argv[0]);
 }
 
-#if defined(NOPRIVEXEC_seccomp)
+#if defined(NOPRIVEXEC_prctl)
 int disable_setuid(void) { return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0); }
 #elif defined(NOPRIVEXEC_pledge)
 int disable_setuid(void) {

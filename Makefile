@@ -8,7 +8,7 @@ ifeq ($(UNAME_SYS), Linux)
               -Wformat -Werror=format-security \
               -fno-strict-aliasing
     LDFLAGS += -Wl,-z,relro,-z,now
-	  NOPRIVEXEC ?= seccomp
+	  NOPRIVEXEC ?= prctl
 else ifeq ($(UNAME_SYS), OpenBSD)
     CFLAGS ?= -D_FORTIFY_SOURCE=2 -O2 -fstack-protector-strong \
               -Wformat -Werror=format-security \
