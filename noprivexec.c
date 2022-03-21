@@ -29,14 +29,13 @@
 #pragma message "unsupported platorm"
 #endif
 
-#define NOPRIVEXEC_VERSION "0.1.0"
+#define NOPRIVEXEC_VERSION "0.1.1"
 
-int disable_setuid(void);
+static int disable_setuid(void);
+static void usage(void);
 
 static const struct option long_options[] = {{"help", no_argument, NULL, 'h'},
                                              {NULL, 0, NULL, 0}};
-
-static void usage();
 
 int main(int argc, char *argv[]) {
   int ch;
@@ -65,9 +64,9 @@ int main(int argc, char *argv[]) {
 }
 
 #if defined(NOPRIVEXEC_prctl)
-int disable_setuid(void) { return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0); }
+static int disable_setuid(void) { return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0); }
 #elif defined(NOPRIVEXEC_pledge)
-int disable_setuid(void) {
+static int disable_setuid(void) {
   char execpromises[1024] = {0};
   int i;
 
@@ -83,13 +82,13 @@ int disable_setuid(void) {
   return pledge(NULL, execpromises);
 }
 #else
-int disable_setuid(void) {
+static int disable_setuid(void) {
   errno = EPERM;
   return -1;
 }
 #endif
 
-static void usage() {
+static void usage(void) {
   errx(EXIT_FAILURE,
        "[OPTION] <COMMAND> <...>\n"
        "version: %s (%s)\n"
