@@ -17,6 +17,7 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdnoreturn.h>
 #include <unistd.h>
 
 #if defined(NOPRIVEXEC_prctl)
@@ -64,7 +65,9 @@ int main(int argc, char *argv[]) {
 }
 
 #if defined(NOPRIVEXEC_prctl)
-static int disable_setuid(void) { return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0); }
+static int disable_setuid(void) {
+  return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0);
+}
 #elif defined(NOPRIVEXEC_pledge)
 static int disable_setuid(void) {
   char execpromises[1024] = {0};
@@ -88,7 +91,7 @@ static int disable_setuid(void) {
 }
 #endif
 
-static void usage(void) {
+static noreturn void usage(void) {
   errx(EXIT_FAILURE,
        "[OPTION] <COMMAND> <...>\n"
        "version: %s (%s)\n"
