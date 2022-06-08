@@ -20,7 +20,7 @@ else ifeq ($(UNAME_SYS), FreeBSD)
               -Wformat -Werror=format-security \
               -fno-strict-aliasing
     LDFLAGS += -Wno-missing-braces -Wl,-z,relro,-z,now
-    NOPRIVEXEC ?= capsicum
+    NOPRIVEXEC ?= procctl
 else ifeq ($(UNAME_SYS), Darwin)
     CFLAGS ?= -D_FORTIFY_SOURCE=2 -O2 -fstack-protector-strong \
               -Wformat -Werror=format-security \

@@ -22,6 +22,8 @@
 
 #if defined(NOPRIVEXEC_prctl)
 #include <sys/prctl.h>
+#elif defined(NOPRIVEXEC_procctl)
+#include <sys/procctl.h>
 #elif defined(NOPRIVEXEC_pledge)
 #include <string.h>
 #define PLEDGENAMES
@@ -67,6 +69,11 @@ int main(int argc, char *argv[]) {
 #if defined(NOPRIVEXEC_prctl)
 static int disable_setuid(void) {
   return prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0);
+}
+#elif defined(NOPRIVEXEC_procctl)
+static int disable_setuid(void) {
+  int data = PROC_NO_NEW_PRIVS_ENABLE;
+  return procctl(P_PID, 0, PROC_NO_NEW_PRIVS_CTL, &data);
 }
 #elif defined(NOPRIVEXEC_pledge)
 static int disable_setuid(void) {
