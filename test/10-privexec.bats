@@ -25,6 +25,10 @@ EOF
         [ "$status" -eq 2 ]
         [ "$output" = "ping: socket: Operation not permitted" ]
         ;;
+    FreeBSD)
+        [ "$status" -eq 71 ]
+        [ "$output" = "ping: ssend socket: Operation not permitted" ]
+        ;;
     OpenBSD)
         [ "$status" -eq 127 ]
         [ "$output" = "noprivexec: ping: Permission denied" ]

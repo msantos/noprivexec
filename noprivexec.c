@@ -32,7 +32,7 @@
 #pragma message "unsupported platorm"
 #endif
 
-#define NOPRIVEXEC_VERSION "0.1.1"
+#define NOPRIVEXEC_VERSION "1.0.0"
 
 static int disable_setuid(void);
 static void usage(void);
