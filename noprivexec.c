@@ -32,7 +32,7 @@
 #pragma message "unsupported platorm"
 #endif
 
-#define NOPRIVEXEC_VERSION "1.0.0"
+#define NOPRIVEXEC_VERSION "1.0.1"
 
 static int disable_setuid(void);
 static void usage(void);
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
 
   (void)execvp(argv[0], argv);
 
-  err(127, "%s", argv[0]);
+  err(errno == ENOENT ? 127 : 126, "%s", argv[0]);
 }
 
 #if defined(NOPRIVEXEC_prctl)
