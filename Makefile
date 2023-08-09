@@ -31,7 +31,7 @@ endif
 RM ?= rm
 
 NOPRIVEXEC ?= rlimit
-NOPRIVEXEC_CFLAGS ?= -g -Wall -fwrapv -pedantic -pie -fPIE
+NOPRIVEXEC_CFLAGS ?= -g -Wall -Wextra -fwrapv -pedantic -pie -fPIE
 
 CFLAGS += $(NOPRIVEXEC_CFLAGS) \
           -DNOPRIVEXEC=\"$(NOPRIVEXEC)\" \
