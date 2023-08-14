@@ -1,4 +1,4 @@
-/* Copyright (c) 2021-2022, Michael Santos <michael.santos@gmail.com>
+/* Copyright (c) 2021-2023, Michael Santos <michael.santos@gmail.com>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -29,7 +29,7 @@
 #define PLEDGENAMES
 #include <sys/pledge.h>
 #else
-#pragma message "unsupported platorm"
+#pragma message "unsupported platform"
 #endif
 
 #define NOPRIVEXEC_VERSION "1.0.1"
