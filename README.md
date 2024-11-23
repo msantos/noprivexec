@@ -24,10 +24,12 @@ ping: icmp open socket: Operation not permitted
 
 # Build
 
-    make
+```
+make
 
-    #### static executable using musl
-    ./musl-make
+#### static executable using musl
+./musl-make
+```
 
 # OPTIONS
 
