@@ -35,3 +35,8 @@ make
 
 -h, --help
 : usage summary
+
+# ALTERNATIVES
+
+* [noprivexec-go](https://codeberg.org/msantos/noprivexec-go)
+* [noprivexec-rs](https://codeberg.org/msantos/noprivexec-rs)
