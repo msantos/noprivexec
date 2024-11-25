@@ -4,6 +4,5 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-export NOPRIVEXEC_CFLAGS="-no-pie"
 export CC="musl-gcc -static -Os"
 exec make $@
